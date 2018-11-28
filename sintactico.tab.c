@@ -112,51 +112,82 @@ extern int yydebug;
   enum yytokentype
   {
     TIPODATO = 258,
-    WS = 259,
-    CLASS = 260,
-    ASIGNACION = 261,
-    IF = 262,
-    CONTRARIO = 263,
-    CONTRARIOIF = 264,
-    OPARIT_ADD = 265,
-    OPARIT_SUB = 266,
-    OPARIT_MUL = 267,
-    OPARIT_DIV = 268,
-    OPARIT_REM = 269,
-    OPARIT_EXP = 270,
-    OPARIT_INC = 271,
-    OPARIT_DEC = 272,
-    NUMERO = 273,
-    CICLO = 274,
-    KINGDOM = 275,
-    RETURN = 276,
-    DECLARACION = 277,
-    IMPORTACION = 278,
-    FUNCION = 279,
-    AGRUP_LPAREN = 280,
-    AGRUP_RPAREN = 281,
-    AGRUP_LBRACK = 282,
-    AGRUP_RBRACK = 283,
-    AGRUP_LBRACE = 284,
-    AGRUP_RBRACE = 285,
-    OPLOG_OR = 286,
-    OPLOG_AND = 287,
-    OPLOG_NOT = 288,
-    ID = 289,
-    PUNTO = 290,
-    OPREL_LT = 291,
-    OPREL_GT = 292,
-    OPREL_LE = 293,
-    OPREL_GE = 294,
-    OPREL_EQ = 295,
-    OPREL_NE = 296,
-    COMA = 297,
-    REFERENCIA = 298,
-    RANGE = 299,
-    FOR = 300,
-    SWITCH = 301,
-    ARRAY = 302,
-    ALCANCE = 303
+    INSTANCIA = 259,
+    MODIFICADOR = 260,
+    SELECCION = 261,
+    SWITCH = 262,
+    PARAMETRO = 263,
+    EXCEPCION = 264,
+    TERMINAR = 265,
+    CONTINUAR = 266,
+    DETENER = 267,
+    RESTRICCION = 268,
+    ESTRUCTURA = 269,
+    ELIMINAR = 270,
+    ESCRIBIR = 271,
+    EXTENSION = 272,
+    SIGUIENTE = 273,
+    INFERENCIA = 274,
+    ENUMERADOR = 275,
+    COMPILADOR = 276,
+    PROPIEDAD = 277,
+    INICIACION = 278,
+    INTERFACE = 279,
+    MODULO = 280,
+    DICCIONARIO = 281,
+    NULO = 282,
+    REFERENCIA = 283,
+    CONTRARIO = 284,
+    CONTRARIOIF = 285,
+    CONDICIONAL = 286,
+    ALCANCE = 287,
+    DECLARACION = 288,
+    IMPORTACION = 289,
+    FUNCION = 290,
+    ARRAY = 291,
+    RANGE = 292,
+    IN = 293,
+    NUMERO = 294,
+    ID = 295,
+    CLASS = 296,
+    IF = 297,
+    KINGDOM = 298,
+    RETURN = 299,
+    TRY = 300,
+    OOPS = 301,
+    CICLO_FOR = 302,
+    CICLO_DO = 303,
+    CICLO_WHILE = 304,
+    CICLO_FOREACH = 305,
+    CICLO_REDO = 306,
+    CICLO_UNTIL = 307,
+    CICLO_RETRY = 308,
+    ASIGNACION = 309,
+    OPARIT_ADD = 310,
+    OPARIT_SUB = 311,
+    OPARIT_MUL = 312,
+    OPARIT_DIV = 313,
+    OPARIT_REM = 314,
+    OPARIT_EXP = 315,
+    OPARIT_INC = 316,
+    OPARIT_DEC = 317,
+    AGRUP_LPAREN = 318,
+    AGRUP_RPAREN = 319,
+    AGRUP_LBRACK = 320,
+    AGRUP_RBRACK = 321,
+    AGRUP_LBRACE = 322,
+    AGRUP_RBRACE = 323,
+    OPLOG_OR = 324,
+    OPLOG_AND = 325,
+    OPLOG_NOT = 326,
+    COMA = 327,
+    PUNTO = 328,
+    OPREL_LT = 329,
+    OPREL_GT = 330,
+    OPREL_LE = 331,
+    OPREL_GE = 332,
+    OPREL_EQ = 333,
+    OPREL_NE = 334
   };
 #endif
 
@@ -167,11 +198,9 @@ union YYSTYPE
 {
 #line 15 "sintactico.y" /* yacc.c:355  */
 
-    float real;
-    int numero;
-    char* texto;
+    
 
-#line 175 "sintactico.tab.c" /* yacc.c:355  */
+#line 204 "sintactico.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -188,7 +217,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 192 "sintactico.tab.c" /* yacc.c:358  */
+#line 221 "sintactico.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -430,21 +459,21 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   9
+#define YYLAST   6
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  49
+#define YYNTOKENS  80
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  4
+#define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  4
+#define YYNRULES  3
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  14
+#define YYNSTATES  10
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   303
+#define YYMAXUTOK   334
 
 #define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -483,14 +512,17 @@ static const yytype_uint8 yytranslate[] =
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
       35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
+      75,    76,    77,    78,    79
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    70,    70,    72,    74
+       0,   100,   100,   102
 };
 #endif
 
@@ -499,16 +531,22 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "TIPODATO", "WS", "CLASS", "ASIGNACION",
-  "IF", "CONTRARIO", "CONTRARIOIF", "OPARIT_ADD", "OPARIT_SUB",
+  "$end", "error", "$undefined", "TIPODATO", "INSTANCIA", "MODIFICADOR",
+  "SELECCION", "SWITCH", "PARAMETRO", "EXCEPCION", "TERMINAR", "CONTINUAR",
+  "DETENER", "RESTRICCION", "ESTRUCTURA", "ELIMINAR", "ESCRIBIR",
+  "EXTENSION", "SIGUIENTE", "INFERENCIA", "ENUMERADOR", "COMPILADOR",
+  "PROPIEDAD", "INICIACION", "INTERFACE", "MODULO", "DICCIONARIO", "NULO",
+  "REFERENCIA", "CONTRARIO", "CONTRARIOIF", "CONDICIONAL", "ALCANCE",
+  "DECLARACION", "IMPORTACION", "FUNCION", "ARRAY", "RANGE", "IN",
+  "NUMERO", "ID", "CLASS", "IF", "KINGDOM", "RETURN", "TRY", "OOPS",
+  "CICLO_FOR", "CICLO_DO", "CICLO_WHILE", "CICLO_FOREACH", "CICLO_REDO",
+  "CICLO_UNTIL", "CICLO_RETRY", "ASIGNACION", "OPARIT_ADD", "OPARIT_SUB",
   "OPARIT_MUL", "OPARIT_DIV", "OPARIT_REM", "OPARIT_EXP", "OPARIT_INC",
-  "OPARIT_DEC", "NUMERO", "CICLO", "KINGDOM", "RETURN", "DECLARACION",
-  "IMPORTACION", "FUNCION", "AGRUP_LPAREN", "AGRUP_RPAREN", "AGRUP_LBRACK",
+  "OPARIT_DEC", "AGRUP_LPAREN", "AGRUP_RPAREN", "AGRUP_LBRACK",
   "AGRUP_RBRACK", "AGRUP_LBRACE", "AGRUP_RBRACE", "OPLOG_OR", "OPLOG_AND",
-  "OPLOG_NOT", "ID", "PUNTO", "OPREL_LT", "OPREL_GT", "OPREL_LE",
-  "OPREL_GE", "OPREL_EQ", "OPREL_NE", "COMA", "REFERENCIA", "RANGE", "FOR",
-  "SWITCH", "ARRAY", "ALCANCE", "$accept", "FUNCION_PRINCIPAL",
-  "FUNCION_1", "VARIABLE", YY_NULLPTR
+  "OPLOG_NOT", "COMA", "PUNTO", "OPREL_LT", "OPREL_GT", "OPREL_LE",
+  "OPREL_GE", "OPREL_EQ", "OPREL_NE", "$accept", "FUNCION_PRINCIPAL",
+  "FUNCION_1", YY_NULLPTR
 };
 #endif
 
@@ -521,14 +559,17 @@ static const yytype_uint16 yytoknum[] =
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
      285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
-     295,   296,   297,   298,   299,   300,   301,   302,   303
+     295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
+     305,   306,   307,   308,   309,   310,   311,   312,   313,   314,
+     315,   316,   317,   318,   319,   320,   321,   322,   323,   324,
+     325,   326,   327,   328,   329,   330,   331,   332,   333,   334
 };
 # endif
 
-#define YYPACT_NINF -49
+#define YYPACT_NINF -64
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-49)))
+  (!!((Yystate) == (-64)))
 
 #define YYTABLE_NINF -1
 
@@ -539,8 +580,7 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -48,   -19,     2,   -49,   -22,   -49,   -25,   -29,    -4,   -23,
-     -26,   -17,   -49,   -49
+     -32,   -42,     2,   -64,   -60,   -64,   -63,   -62,   -59,   -64
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -548,20 +588,19 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,     2,     0,     1,     0,     0,     0,     0,
-       0,     0,     4,     3
+       0,     0,     0,     2,     0,     1,     0,     0,     0,     3
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -49,   -49,   -49,   -49
+     -64,   -64,   -64
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     9
+      -1,     2,     3
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -569,32 +608,31 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       1,     4,     5,     6,     7,     8,    10,    11,    12,    13
+       1,     4,     5,     6,     7,     9,     8
 };
 
 static const yytype_uint8 yycheck[] =
 {
-      48,    20,     0,    25,    29,    34,    10,    30,    34,    26
+      32,    43,     0,    63,    67,    64,    68
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    48,    50,    51,    20,     0,    25,    29,    34,    52,
-      10,    30,    34,    26
+       0,    32,    81,    82,    43,     0,    63,    67,    68,    64
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    49,    50,    51,    52
+       0,    80,    81,    82
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     7,     3
+       0,     2,     1,     6
 };
 
 
@@ -1271,7 +1309,7 @@ yyreduce:
   switch (yyn)
     {
       
-#line 1275 "sintactico.tab.c" /* yacc.c:1646  */
+#line 1313 "sintactico.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1499,10 +1537,10 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 77 "sintactico.y" /* yacc.c:1906  */
+#line 107 "sintactico.y" /* yacc.c:1906  */
 
 void yyerror(char *s){
-    printf("%s \n",s);
+    printf("\n%s \n",s);
 }
 
 int main(int argc, char **argv){

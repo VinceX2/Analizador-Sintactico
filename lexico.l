@@ -21,12 +21,9 @@ digito [0-9]
 
 id {letra}({letra}|{digito}|_)*
 numero {digito}+(\.{digito}+)?(E[+\-]?(digito)+)?
-
-
-
-ciclo (do|while|foreach|redo|until|retry)
-for (for)
+tipoDato (int,double,byte,char,short,long,bool,float)
 alcance (king|knight|farmer)
+
 referencia (is|with|this)
 contrario (else)
 range (range)
@@ -35,36 +32,10 @@ contrarioif (elif)
 declaracion (new|castle)
 importacion (tricks|using)
 funcion (def|inline|print)
-eof ';'
-coma ','
-
-
-agrupacion-lparen '('
-agrupacion-rparen ')'
-agrupacion-lbrack '['
-agrupacion-rbrack ']'
-agrupacion-lbrace '{'
-agrupacion-rbrace '}'
 
 arreglo (array)
 condicional (when|unless|then)
 in (in)
-punto '.'
-
-oprel-LT (<)
-oprel-GT (>)
-oprel-LE (<=)
-oprel-GE (>=)
-oprel-EQ (==)
-oprel-NE (!=)
-
-tipoDato (int,double,byte,char,short,long,bool,float)
-
-
-oplog-or (\|)
-oplog-and (\&&)
-oplog-not (!)
-
 nulo (none|pass)
 
 metodo (stone|open|input)
@@ -74,7 +45,7 @@ seleccion (select)
 switch (switch)
 
 parametro (map)
-excepcion (raise|oops|try|throws|ensure|rescue)
+excepcion (raise|throws|ensure|rescue)
 terminar (finally)
 continuar (continue)
 detener (stop)
@@ -102,96 +73,159 @@ diccionario (del)
 
 {ws} {}
 
-{tipoDato} {return TIPODATO;}
+class {printf("%s",yytext);return CLASS;}
 
-
-
-"=" { return ASIGNACION;}
-
-class {return CLASS;}
-
-if {return IF;}
-
-{referencia} {return REFERENCIA;}
-
-{contrario} { return CONTRARIO;}
-
-{contrarioif} {return CONTRARIOIF;}
-
-
-"+" {printf("%s",yytext);return OPARIT_ADD;}
-
-"-" {return OPARIT_SUB;}
-
-"*" {return OPARIT_MUL;}
-
-"/" {return OPARIT_DIV;}
-
-"%" {return OPARIT_REM;}
-
-"%%" {return OPARIT_EXP;}
-
-"++" {return OPARIT_INC;}
-
-"--" {return OPARIT_DEC;}
-
-
-{numero} { return NUMERO;}
-
-{ciclo} {return CICLO;}
+if {printf("%s",yytext);return IF;}
 
 kingdom {printf("%s",yytext); return KINGDOM;}
 
+yield|return {printf("%s",yytext);return RETURN;}
+
+try {printf("%s",yytext);return TRY;}
+
+oops {printf("%s",yytext);return OOPS;}
+
+for {printf("%s",yytext);return CICLO_FOR;}
+
+do {printf("%s",yytext);return CICLO_DO;}
+
+while {printf("%s",yytext);return CICLO_WHILE;}
+
+foreach {printf("%s",yytext);return CICLO_FOREACH;}
+
+redo {printf("%s",yytext);return CICLO_REDO;}
+
+until {printf("%s",yytext);return CICLO_UNTIL;}
+
+retry {printf("%s",yytext);return CICLO_RETRY;}
+
+{tipoDato} {printf("%s",yytext);return TIPODATO;}
+
+{instancia} {printf("%s",yytext);return INSTANCIA;}
+
+{modificador} {printf("%s",yytext);return MODIFICADOR;}
+
+{seleccion} {printf("%s",yytext);return SELECCION;}
+
+{switch} {printf("%s",yytext);return SWITCH;}
+
+{parametro} {printf("%s",yytext);return PARAMETRO;}
+
+{excepcion} {printf("%s",yytext);return EXCEPCION;}
+
+{terminar} {printf("%s",yytext);return TERMINAR;}
+
+{continuar} {printf("%s",yytext);return CONTINUAR;}
+
+{detener} {printf("%s",yytext);return DETENER;}
+
+{restriccion} {printf("%s",yytext);return RESTRICCION;}
+
+{estructura} {printf("%s",yytext);return ESTRUCTURA;}
+
+{eliminar} {printf("%s",yytext);return ELIMINAR;}
+
+{escribir} {printf("%s",yytext);return ESCRIBIR;}
+
+{extension} {printf("%s",yytext);return EXTENSION;}
+
+{siguiente} {printf("%s",yytext);return SIGUIENTE;}
+
+{inferencia} {printf("%s",yytext);return INFERENCIA;}
+
+{enumerador} {printf("%s",yytext);return ENUMERADOR;}
+
+{compilador} {printf("%s",yytext);return COMPILADOR;}
+
+{propiedad} {printf("%s",yytext);return PROPIEDAD;}
+
+{iniciacion} {printf("%s",yytext);return INICIACION;}
+
+{interface} {printf("%s",yytext);return INTERFACE;}
+
+{modulo} {printf("%s",yytext);return MODULO;}
+
+{diccionario} {printf("%s",yytext);return DICCIONARIO;}
+
+{nulo} {printf("%s",yytext);return NULO;}
+
+{referencia} {printf("%s",yytext);return REFERENCIA;}
+
+{contrario} {printf("%s",yytext);return CONTRARIO;}
+
+{contrarioif} {printf("%s",yytext);return CONTRARIOIF;}
+
+{condicional} {printf("%s",yytext);return CONDICIONAL;}
+
 {alcance} {printf("%s",yytext);return ALCANCE;}
 
-yield|return {return RETURN;}
+{declaracion} {printf("%s",yytext);return DECLARACION;}
 
-{declaracion} {return DECLARACION;}
+{importacion} {printf("%s",yytext);return IMPORTACION;}
 
-{importacion} {return IMPORTACION;}
+{funcion} {printf("%s",yytext);return FUNCION;}
 
-{funcion} {return FUNCION;}
+{arreglo} {printf("%s",yytext);return ARRAY;}
+
+{range} {printf("%s",yytext);return RANGE;}
+
+{in} {printf("%s",yytext);return IN;}
+
+{numero} {printf("%s",yytext);return NUMERO;}
+
+{id} {printf("%s",yytext);return ID;}
+
+"=" {printf("%s",yytext);return ASIGNACION;}
+
+"+" {printf("%s",yytext);return OPARIT_ADD;}
+
+"-" {printf("%s",yytext);return OPARIT_SUB;}
+
+"*" {printf("%s",yytext);return OPARIT_MUL;}
+
+"/" {printf("%s",yytext);return OPARIT_DIV;}
+
+"%" {printf("%s",yytext);return OPARIT_REM;}
+
+"%%" {printf("%s",yytext);return OPARIT_EXP;}
+
+"++" {printf("%s",yytext);return OPARIT_INC;}
+
+"--" {printf("%s",yytext);return OPARIT_DEC;}
 
 "(" {printf("%s",yytext);return AGRUP_LPAREN;}
 
 ")" {printf("%s",yytext);return AGRUP_RPAREN;}
 
-"[" {return AGRUP_LBRACK;}
+"[" {printf("%s",yytext);return AGRUP_LBRACK;}
 
-"]" {return AGRUP_RBRACK;}
+"]" {printf("%s",yytext);return AGRUP_RBRACK;}
 
 "{" {printf("%s",yytext);return AGRUP_LBRACE;}
 
 "}" {printf("%s",yytext);return AGRUP_RBRACE;}
 
-{oplog-or} {return OPLOG_OR;}
+"|" {printf("%s",yytext);return OPLOG_OR;}
 
-{oplog-and} {return OPLOG_AND;}
+"&&" {printf("%s",yytext);return OPLOG_AND;}
 
-{oplog-not} {return OPLOG_NOT;}
+"!" {printf("%s",yytext);return OPLOG_NOT;}
 
+"," {printf("%s",yytext);return COMA;}
 
-{arreglo} {return ARRAY;}
+"." {printf("%s",yytext);return PUNTO;}
 
-{switch} {return SWITCH;}
+"<" {printf("%s",yytext);return OPREL_LT;}
 
-{range} {return RANGE;}
+">" {printf("%s",yytext);return OPREL_GT;}
 
+"<=" {printf("%s",yytext);return OPREL_LE;}
 
-"," {return COMA;}
+">=" {printf("%s",yytext);return OPREL_GE;}
 
-{id} {printf("%s",yytext);return ID;}
+"==" {printf("%s",yytext);return OPREL_EQ;}
 
-'.' {return PUNTO;}
-
-{oprel-LT} {return OPREL_LT;}
-{oprel-GT} {return OPREL_GT;}
-{oprel-LE} {return OPREL_LE;}
-{oprel-GE} {return OPREL_GE;}
-{oprel-EQ} {return OPREL_EQ;}
-{oprel-NE} {return OPREL_NE;}
-
-
+"!=" {printf("%s",yytext);return OPREL_NE;}
 
 %%
 /* Lenguaje C*/

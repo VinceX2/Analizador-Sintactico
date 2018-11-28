@@ -1,3 +1,2 @@
-king kingdom ( { 
-num1 + 
-} )
+king kingdom ({
+})

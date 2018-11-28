@@ -13,18 +13,61 @@
 %}
 
 %union{
-    float real;
-    int numero;
-    char* texto;
+    
 }
 
 %token TIPODATO
-%token WS
-%token CLASS
-%token ASIGNACION
-%token IF 
+%token INSTANCIA
+%token MODIFICADOR
+%token SELECCION
+%token SWITCH
+%token PARAMETRO
+%token EXCEPCION
+%token TERMINAR
+%token CONTINUAR
+%token DETENER
+%token RESTRICCION
+%token ESTRUCTURA
+%token ELIMINAR
+%token ESCRIBIR
+%token EXTENSION
+%token SIGUIENTE
+%token INFERENCIA
+%token ENUMERADOR
+%token COMPILADOR
+%token PROPIEDAD
+%token INICIACION
+%token INTERFACE
+%token MODULO
+%token DICCIONARIO
+%token NULO
+%token REFERENCIA
 %token CONTRARIO
 %token CONTRARIOIF
+%token CONDICIONAL
+%token ALCANCE
+%token DECLARACION
+%token IMPORTACION
+%token FUNCION
+%token ARRAY
+%token RANGE
+%token IN
+%token NUMERO
+%token ID
+%token CLASS
+%token IF;
+%token KINGDOM
+%token RETURN
+%token TRY
+%token OOPS;
+%token CICLO_FOR
+%token CICLO_DO
+%token CICLO_WHILE
+%token CICLO_FOREACH
+%token CICLO_REDO
+%token CICLO_UNTIL
+%token CICLO_RETRY
+%token ASIGNACION
 %token OPARIT_ADD
 %token OPARIT_SUB
 %token OPARIT_MUL
@@ -33,13 +76,6 @@
 %token OPARIT_EXP
 %token OPARIT_INC
 %token OPARIT_DEC
-%token NUMERO
-%token CICLO
-%token KINGDOM
-%token RETURN
-%token DECLARACION
-%token IMPORTACION
-%token FUNCION
 %token AGRUP_LPAREN
 %token AGRUP_RPAREN
 %token AGRUP_LBRACK
@@ -49,7 +85,7 @@
 %token OPLOG_OR
 %token OPLOG_AND
 %token OPLOG_NOT
-%token ID
+%token COMA
 %token PUNTO
 %token OPREL_LT
 %token OPREL_GT
@@ -57,26 +93,21 @@
 %token OPREL_GE
 %token OPREL_EQ
 %token OPREL_NE
-%token COMA
-%token REFERENCIA
-%token RANGE        
-%token FOR
-%token SWITCH
-%token ARRAY
-%token ALCANCE
+
 %start FUNCION_PRINCIPAL
 %%
 
     FUNCION_PRINCIPAL: FUNCION_1;
     
-    FUNCION_1: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE VARIABLE AGRUP_RBRACE AGRUP_RPAREN;
+    FUNCION_1: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE AGRUP_RBRACE AGRUP_RPAREN;
+    
 
-    VARIABLE: ID OPARIT_ADD ID;
+ 
 
 
 %%
 void yyerror(char *s){
-    printf("%s \n",s);
+    printf("\n%s \n",s);
 }
 
 int main(int argc, char **argv){

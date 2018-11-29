@@ -1,0 +1,520 @@
+Terminals unused in grammar
+
+   INSTANCIA
+   MODIFICADOR
+   SELECCION
+   SWITCH
+   PARAMETRO
+   EXCEPCION
+   TERMINAR
+   CONTINUAR
+   DETENER
+   RESTRICCION
+   ESTRUCTURA
+   ELIMINAR
+   ESCRIBIR
+   EXTENSION
+   SIGUIENTE
+   INFERENCIA
+   ENUMERADOR
+   COMPILADOR
+   PROPIEDAD
+   INICIACION
+   INTERFACE
+   MODULO
+   DICCIONARIO
+   NULO
+   REFERENCIA
+   CONTRARIO
+   CONTRARIOIF
+   CONDICIONAL
+   DECLARACION
+   IMPORTACION
+   FUNCION
+   ARRAY
+   RANGE
+   IN
+   CLASS
+   IF
+   RETURN
+   TRY
+   OOPS
+   CICLO_FOR
+   CICLO_DO
+   CICLO_WHILE
+   CICLO_FOREACH
+   CICLO_REDO
+   CICLO_UNTIL
+   CICLO_RETRY
+   OPARIT_ADD
+   OPARIT_SUB
+   OPARIT_MUL
+   OPARIT_DIV
+   OPARIT_REM
+   OPARIT_EXP
+   OPARIT_INC
+   OPARIT_DEC
+   AGRUP_LBRACK
+   AGRUP_RBRACK
+   OPLOG_OR
+   OPLOG_AND
+   OPLOG_NOT
+   OPREL_LT
+   OPREL_GT
+   OPREL_LE
+   OPREL_GE
+   OPREL_EQ
+   OPREL_NE
+
+
+State 11 conflicts: 3 shift/reduce
+State 24 conflicts: 2 shift/reduce
+
+
+Grammar
+
+    0 $accept: namespace $end
+
+    1 namespace: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN
+
+    2 program: declarations
+    3        | program declarations statements
+
+    4 declarations: declarations declaration_var
+    5             | declaration_var
+
+    6 declaration_var: names PUNTO TIPODATO
+    7                | names TIPODATO
+    8                | names PUNTO
+    9                | PUNTO TIPODATO
+
+   10 names: variable
+   11      | names COMA variable
+
+   12 variable: NUMERO
+   13         | ID
+
+   14 statements: statements statement
+   15           | statement
+
+   16 statement: assigment
+
+   17 expression: variable
+
+   18 assigment: variable ASIGNACION expression
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+TIPODATO (258) 6 7 9
+INSTANCIA (259)
+MODIFICADOR (260)
+SELECCION (261)
+SWITCH (262)
+PARAMETRO (263)
+EXCEPCION (264)
+TERMINAR (265)
+CONTINUAR (266)
+DETENER (267)
+RESTRICCION (268)
+ESTRUCTURA (269)
+ELIMINAR (270)
+ESCRIBIR (271)
+EXTENSION (272)
+SIGUIENTE (273)
+INFERENCIA (274)
+ENUMERADOR (275)
+COMPILADOR (276)
+PROPIEDAD (277)
+INICIACION (278)
+INTERFACE (279)
+MODULO (280)
+DICCIONARIO (281)
+NULO (282)
+REFERENCIA (283)
+CONTRARIO (284)
+CONTRARIOIF (285)
+CONDICIONAL (286)
+ALCANCE (287) 1
+DECLARACION (288)
+IMPORTACION (289)
+FUNCION (290)
+ARRAY (291)
+RANGE (292)
+IN (293)
+NUMERO (294) 12
+ID (295) 13
+CLASS (296)
+IF (297)
+KINGDOM (298) 1
+RETURN (299)
+TRY (300)
+OOPS (301)
+CICLO_FOR (302)
+CICLO_DO (303)
+CICLO_WHILE (304)
+CICLO_FOREACH (305)
+CICLO_REDO (306)
+CICLO_UNTIL (307)
+CICLO_RETRY (308)
+ASIGNACION (309) 18
+OPARIT_ADD (310)
+OPARIT_SUB (311)
+OPARIT_MUL (312)
+OPARIT_DIV (313)
+OPARIT_REM (314)
+OPARIT_EXP (315)
+OPARIT_INC (316)
+OPARIT_DEC (317)
+AGRUP_LPAREN (318) 1
+AGRUP_RPAREN (319) 1
+AGRUP_LBRACK (320)
+AGRUP_RBRACK (321)
+AGRUP_LBRACE (322) 1
+AGRUP_RBRACE (323) 1
+OPLOG_OR (324)
+OPLOG_AND (325)
+OPLOG_NOT (326)
+COMA (327) 11
+PUNTO (328) 6 8 9
+OPREL_LT (329)
+OPREL_GT (330)
+OPREL_LE (331)
+OPREL_GE (332)
+OPREL_EQ (333)
+OPREL_NE (334)
+
+
+Nonterminals, with rules where they appear
+
+$accept (80)
+    on left: 0
+namespace (81)
+    on left: 1, on right: 0
+program (82)
+    on left: 2 3, on right: 1 3
+declarations (83)
+    on left: 4 5, on right: 2 3 4
+declaration_var (84)
+    on left: 6 7 8 9, on right: 4 5
+names (85)
+    on left: 10 11, on right: 6 7 8 11
+variable (86)
+    on left: 12 13, on right: 10 11 17 18
+statements (87)
+    on left: 14 15, on right: 3 14
+statement (88)
+    on left: 16, on right: 14 15
+expression (89)
+    on left: 17, on right: 18
+assigment (90)
+    on left: 18, on right: 16
+
+
+State 0
+
+    0 $accept: . namespace $end
+
+    ALCANCE  shift, and go to state 1
+
+    namespace  go to state 2
+
+
+State 1
+
+    1 namespace: ALCANCE . KINGDOM AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN
+
+    KINGDOM  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: namespace . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 namespace: ALCANCE KINGDOM . AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN
+
+    AGRUP_LPAREN  shift, and go to state 5
+
+
+State 4
+
+    0 $accept: namespace $end .
+
+    $default  accept
+
+
+State 5
+
+    1 namespace: ALCANCE KINGDOM AGRUP_LPAREN . AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN
+
+    AGRUP_LBRACE  shift, and go to state 6
+
+
+State 6
+
+    1 namespace: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE . program AGRUP_RBRACE AGRUP_RPAREN
+
+    NUMERO  shift, and go to state 7
+    ID      shift, and go to state 8
+    PUNTO   shift, and go to state 9
+
+    program          go to state 10
+    declarations     go to state 11
+    declaration_var  go to state 12
+    names            go to state 13
+    variable         go to state 14
+
+
+State 7
+
+   12 variable: NUMERO .
+
+    $default  reduce using rule 12 (variable)
+
+
+State 8
+
+   13 variable: ID .
+
+    $default  reduce using rule 13 (variable)
+
+
+State 9
+
+    9 declaration_var: PUNTO . TIPODATO
+
+    TIPODATO  shift, and go to state 15
+
+
+State 10
+
+    1 namespace: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE program . AGRUP_RBRACE AGRUP_RPAREN
+    3 program: program . declarations statements
+
+    NUMERO        shift, and go to state 7
+    ID            shift, and go to state 8
+    AGRUP_RBRACE  shift, and go to state 16
+    PUNTO         shift, and go to state 9
+
+    declarations     go to state 17
+    declaration_var  go to state 12
+    names            go to state 13
+    variable         go to state 14
+
+
+State 11
+
+    2 program: declarations .
+    4 declarations: declarations . declaration_var
+
+    NUMERO  shift, and go to state 7
+    ID      shift, and go to state 8
+    PUNTO   shift, and go to state 9
+
+    NUMERO    [reduce using rule 2 (program)]
+    ID        [reduce using rule 2 (program)]
+    PUNTO     [reduce using rule 2 (program)]
+    $default  reduce using rule 2 (program)
+
+    declaration_var  go to state 18
+    names            go to state 13
+    variable         go to state 14
+
+
+State 12
+
+    5 declarations: declaration_var .
+
+    $default  reduce using rule 5 (declarations)
+
+
+State 13
+
+    6 declaration_var: names . PUNTO TIPODATO
+    7                | names . TIPODATO
+    8                | names . PUNTO
+   11 names: names . COMA variable
+
+    TIPODATO  shift, and go to state 19
+    COMA      shift, and go to state 20
+    PUNTO     shift, and go to state 21
+
+
+State 14
+
+   10 names: variable .
+
+    $default  reduce using rule 10 (names)
+
+
+State 15
+
+    9 declaration_var: PUNTO TIPODATO .
+
+    $default  reduce using rule 9 (declaration_var)
+
+
+State 16
+
+    1 namespace: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE . AGRUP_RPAREN
+
+    AGRUP_RPAREN  shift, and go to state 22
+
+
+State 17
+
+    3 program: program declarations . statements
+    4 declarations: declarations . declaration_var
+
+    NUMERO  shift, and go to state 7
+    ID      shift, and go to state 8
+    PUNTO   shift, and go to state 9
+
+    declaration_var  go to state 18
+    names            go to state 13
+    variable         go to state 23
+    statements       go to state 24
+    statement        go to state 25
+    assigment        go to state 26
+
+
+State 18
+
+    4 declarations: declarations declaration_var .
+
+    $default  reduce using rule 4 (declarations)
+
+
+State 19
+
+    7 declaration_var: names TIPODATO .
+
+    $default  reduce using rule 7 (declaration_var)
+
+
+State 20
+
+   11 names: names COMA . variable
+
+    NUMERO  shift, and go to state 7
+    ID      shift, and go to state 8
+
+    variable  go to state 27
+
+
+State 21
+
+    6 declaration_var: names PUNTO . TIPODATO
+    8                | names PUNTO .
+
+    TIPODATO  shift, and go to state 28
+
+    $default  reduce using rule 8 (declaration_var)
+
+
+State 22
+
+    1 namespace: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN .
+
+    $default  reduce using rule 1 (namespace)
+
+
+State 23
+
+   10 names: variable .
+   18 assigment: variable . ASIGNACION expression
+
+    ASIGNACION  shift, and go to state 29
+
+    $default  reduce using rule 10 (names)
+
+
+State 24
+
+    3 program: program declarations statements .
+   14 statements: statements . statement
+
+    NUMERO  shift, and go to state 7
+    ID      shift, and go to state 8
+
+    NUMERO    [reduce using rule 3 (program)]
+    ID        [reduce using rule 3 (program)]
+    $default  reduce using rule 3 (program)
+
+    variable   go to state 30
+    statement  go to state 31
+    assigment  go to state 26
+
+
+State 25
+
+   15 statements: statement .
+
+    $default  reduce using rule 15 (statements)
+
+
+State 26
+
+   16 statement: assigment .
+
+    $default  reduce using rule 16 (statement)
+
+
+State 27
+
+   11 names: names COMA variable .
+
+    $default  reduce using rule 11 (names)
+
+
+State 28
+
+    6 declaration_var: names PUNTO TIPODATO .
+
+    $default  reduce using rule 6 (declaration_var)
+
+
+State 29
+
+   18 assigment: variable ASIGNACION . expression
+
+    NUMERO  shift, and go to state 7
+    ID      shift, and go to state 8
+
+    variable    go to state 32
+    expression  go to state 33
+
+
+State 30
+
+   18 assigment: variable . ASIGNACION expression
+
+    ASIGNACION  shift, and go to state 29
+
+
+State 31
+
+   14 statements: statements statement .
+
+    $default  reduce using rule 14 (statements)
+
+
+State 32
+
+   17 expression: variable .
+
+    $default  reduce using rule 17 (expression)
+
+
+State 33
+
+   18 assigment: variable ASIGNACION expression .
+
+    $default  reduce using rule 18 (assigment)

@@ -21,7 +21,7 @@ digito [0-9]
 
 id {letra}({letra}|{digito}|_)*
 numero {digito}+(\.{digito}+)?(E[+\-]?(digito)+)?
-tipoDato (int,double,byte,char,short,long,bool,float)
+tipoDato (int|double|byte|char|short|long|boolfloat)
 alcance (king|knight|farmer)
 
 referencia (is|with|this)

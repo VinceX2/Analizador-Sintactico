@@ -93,13 +93,36 @@
 %token OPREL_GE
 %token OPREL_EQ
 %token OPREL_NE
-
-%start FUNCION_PRINCIPAL
+%start namespace
 %%
 
-    FUNCION_PRINCIPAL: FUNCION_1;
+    namespace: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN;
+
+    program: declarations statements | declarations;
     
-    FUNCION_1: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE AGRUP_RBRACE AGRUP_RPAREN;
+    declarations: declarations declaration_var | declaration_var;
+
+    declaration_var: names PUNTO TIPODATO
+                    | names TIPODATO {printf("\nError Sintactico, falta Tipo de dato\n");} 
+                    | names PUNTO {printf("\nError Sintactico, falta Tipo de dato\n");}
+                    | names {printf("\nError Sintactico, falta declaracion\n");}
+                    ;
+
+    names: variable | names COMA variable;
+
+    variable: NUMERO | ID;
+
+    statements: statements statement | statement ; 
+
+    statement: assigment ;
+
+    expression: variable;
+
+    assigment: variable ASIGNACION expression ;
+
+    
+
+    
     
 
  
@@ -121,7 +144,7 @@ int main(int argc, char **argv){
     }
 
     if(yyparse()==0){
-        printf("\nAnalisis concluido sin errores\n");
+        printf("\nSintaxis Correcta\n");
     }
     
     return 0;

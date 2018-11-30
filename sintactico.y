@@ -42,8 +42,8 @@
 %token DICCIONARIO
 %token NULO
 %token REFERENCIA
-%token CONTRARIO
-%token CONTRARIOIF
+%token ELSE
+%token ELIF
 %token CONDICIONAL
 %token ALCANCE
 %token DECLARACION
@@ -98,11 +98,12 @@
 
     namespace: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN;
 
-    program: declarations statements | declarations;
+    program: declarations statements | declarations | statements;
     
     declarations: declarations declaration_var | declaration_var;
 
-    declaration_var: names PUNTO TIPODATO
+    declaration_var: 
+                    names PUNTO TIPODATO
                     | names TIPODATO {printf("\nError Sintactico, falta Tipo de dato\n");} 
                     | names PUNTO {printf("\nError Sintactico, falta Tipo de dato\n");}
                     | names {printf("\nError Sintactico, falta declaracion\n");}
@@ -112,22 +113,65 @@
 
     variable: NUMERO | ID;
 
+
     statements: statements statement | statement ; 
 
-    statement: assigment ;
-
-    expression: variable;
+    statement: assigment | if_statement | for_statement | while_statement 
+                | function_statement ;
 
     assigment: variable ASIGNACION expression ;
 
+    tail: AGRUP_LBRACE program AGRUP_RBRACE ;
+
+    if_statement: 
+                 AGRUP_LPAREN expression AGRUP_RPAREN PUNTO IF tail elif optional_else
+                 | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO IF tail optional_else
+                 ;
+
+    elif: 
+                elif AGRUP_LPAREN expression AGRUP_RPAREN PUNTO ELIF tail
+                | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO ELIF tail
+                ;
+
+    optional_else: ELSE tail;
+
+    for_statement: AGRUP_LPAREN variable AGRUP_RPAREN IN RANGE AGRUP_LPAREN expression AGRUP_RPAREN 
+                    PUNTO CICLO_FOR tail;
     
+    while_statement: AGRUP_LPAREN expression AGRUP_RPAREN PUNTO CICLO_WHILE tail ;
+
+    function_statement: return_type AGRUP_LPAREN functions_params AGRUP_RPAREN PUNTO FUNCION ID function_tail;
+    
+    return_type: TIPODATO;
+
+    functions_params: parameters | ;
+
+    parameters: parameters COMA parameter | parameter;
+
+    parameter: declaration_var;
+
+    function_tail: AGRUP_LPAREN AGRUP_LBRACE program return_optional AGRUP_RBRACE AGRUP_RPAREN ;
+
+    return_optional: RETURN expression | ;
+    
+    expression: 
+                variable relat_operator variable 
+                | variable arit_operator variable
+                | variable logic_operator variable
+                |variable
+                | variable COMA variable
+                ;
+    
+    logic_operator: OPLOG_AND | OPLOG_NOT | OPLOG_OR ;
+
+
+    arit_operator: OPARIT_ADD | OPARIT_DEC | OPARIT_DIV | OPARIT_EXP 
+                    | OPARIT_INC | OPARIT_MUL | OPARIT_REM | OPARIT_SUB
+                ;
+
+    relat_operator: OPREL_EQ | OPREL_GE | OPREL_GT | OPREL_LE | OPREL_LT | OPREL_NE ;
 
     
-    
-
- 
-
-
 %%
 void yyerror(char *s){
     printf("\n%s \n",s);

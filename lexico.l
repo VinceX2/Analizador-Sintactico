@@ -21,7 +21,7 @@ digito [0-9]
 
 id {letra}({letra}|{digito}|_)*
 numero {digito}+(\.{digito}+)?(E[+\-]?(digito)+)?
-tipoDato (int|double|byte|char|short|long|boolfloat)
+tipoDato (int|double|byte|char|short|long|boolfloat|string)
 alcance (king|knight|farmer)
 
 referencia (is|with|this)
@@ -70,8 +70,6 @@ diccionario (del)
 
 /* Reglas */
 %%
-
-{ws} {}
 
 class {printf("%s",yytext);return CLASS;}
 
@@ -151,9 +149,9 @@ retry {printf("%s",yytext);return CICLO_RETRY;}
 
 {referencia} {printf("%s",yytext);return REFERENCIA;}
 
-{contrario} {printf("%s",yytext);return CONTRARIO;}
+{contrario} {printf("%s",yytext);return ELSE;}
 
-{contrarioif} {printf("%s",yytext);return CONTRARIOIF;}
+{contrarioif} {printf("%s",yytext);return ELIF;}
 
 {condicional} {printf("%s",yytext);return CONDICIONAL;}
 
@@ -191,7 +189,7 @@ retry {printf("%s",yytext);return CICLO_RETRY;}
 
 "++" {printf("%s",yytext);return OPARIT_INC;}
 
-"--" {printf("%s",yytext);return OPARIT_DEC;}
+"--" {printf("%s",yytext);return OPARIT_DEC ;}
 
 "(" {printf("%s",yytext);return AGRUP_LPAREN;}
 

@@ -153,12 +153,12 @@
     function_tail: AGRUP_LPAREN AGRUP_LBRACE program return_optional AGRUP_RBRACE AGRUP_RPAREN ;
 
     return_optional: RETURN expression | ;
-    
+
     expression: 
                 variable relat_operator variable 
                 | variable arit_operator variable
                 | variable logic_operator variable
-                |variable
+                | variable
                 | variable COMA variable
                 ;
     

@@ -1,0 +1,110 @@
+[Perro].class ({
+
+       dalmata.string
+       boxer.string
+
+       get: return dalmata,
+       set: dalmata = value
+    
+       get: return boxer,
+       set: boxer = value
+       
+       construct [knight dalmata, knight boxer]
+   })
+
+   MATH [pi].PI
+   open.().persona
+
+   this.id
+
+   return 0
+
+   brake
+
+   objeto new (objeto)
+
+   def(holaMundo)
+
+    throws [e]
+
+    ['hola'].show
+
+    try ({
+        persona.string
+    })
+    oops(error)({
+        ('Error').print
+    })
+  
+    convert [num2].string
+    close()
+
+    MATH [num3].SQRT
+
+
+
+ do ({
+       num2.int
+       num2 = 3
+
+    })(num2 > 1).while
+
+      return hola
+   })
+
+   do ({
+       num2.int
+       num2 = 3
+
+   })(num2 > 1).while
+
+   ('HelloWorld').print
+
+   num ++
+   num --
+
+
+
+
+
+(num >= 3).while {
+      num3.double
+   }
+   
+   int (num10.int , num11.int).def holaMundo ({
+      hola.string
+      hola = todo
+
+        ('HelloWorld').print
+
+        (num1.int in elementos).foreach {
+            num1.int
+        }
+
+        (num1.int in elementos).foreach {
+            num1.int
+        }
+   })
+
+
+
+
+ num[1,2,3,4,5].string
+
+   ( num > num1).if {
+      num2.int
+      num2 = 6
+   }
+   (num1 < num7).elif {
+      num8.int
+   }
+   else {
+      num3.int
+   }
+
+
+
+num1,num2.int
+   num1 = 4
+   num2 = num1
+   num3 = 5

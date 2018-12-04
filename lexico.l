@@ -79,6 +79,8 @@ kingdom {printf("%s",yytext); return KINGDOM;}
 
 yield|return {printf("%s",yytext);return RETURN;}
 
+brake {printf("%s",yytext);return BRAKE;}
+
 try {printf("%s",yytext);return TRY;}
 
 oops {printf("%s",yytext);return OOPS;}
@@ -96,6 +98,30 @@ redo {printf("%s",yytext);return CICLO_REDO;}
 until {printf("%s",yytext);return CICLO_UNTIL;}
 
 retry {printf("%s",yytext);return CICLO_RETRY;}
+
+print {printf("%s",yytext);return PRINT;}
+
+open {printf("%s",yytext);return OPEN;}
+
+get {printf("%s",yytext);return GET;}
+
+set {printf("%s",yytext);return SET;}
+
+throws {printf("%s",yytext);return THROWS;}
+
+construct {printf("%s",yytext);return CONSTRUCT;}
+
+show {printf("%s",yytext);return SHOW;}
+
+close {printf("%s",yytext);return CLOSE;}
+
+convert {printf("%s",yytext);return CONVERT;}
+
+MATH {printf("%s",yytext);return MATH;}
+
+SQRT {printf("%s",yytext);return SQRT;}
+
+PI {printf("%s",yytext);return PI;}
 
 {tipoDato} {printf("%s",yytext);return TIPODATO;}
 
@@ -195,7 +221,7 @@ retry {printf("%s",yytext);return CICLO_RETRY;}
 
 ")" {printf("%s",yytext);return AGRUP_RPAREN;}
 
-"[" {printf("%s",yytext);return AGRUP_LBRACK;}
+"[" { printf("%s",yytext);return AGRUP_LBRACK;}
 
 "]" {printf("%s",yytext);return AGRUP_RBRACK;}
 
@@ -225,9 +251,12 @@ retry {printf("%s",yytext);return CICLO_RETRY;}
 
 "!=" {printf("%s",yytext);return OPREL_NE;}
 
+"'" {printf("%s",yytext);return COMILLA;}
+
+":" {printf("%s",yytext);return DOSPUNTOS;}
+
 %%
 /* Lenguaje C*/
-  
 
 /*Main C*/
 

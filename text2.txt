@@ -1,38 +1,18 @@
-king kingdom ({
-   num1,num2.int
-   num1 = 4
-   num2 = num1
-   num3 = 5
+king kingdom [
 
-   ( num > num1).if {
-      num2.int
-      num2 = 6
+   (x) in range (0).for {
+
+      num.int
    }
-   (num1 < num7).elif {
-      num8.int
-   }
-   else {
-      num3.int
-   }
+
+   (num1 > num2).if [
+
+      ]
+      (num1 > num2).elif [
+
+      ]
+      else [
+         
+      ]
    
-   (x) in range (0,3).for {
-      ( num > num1).if {
-         num2.int
-         num2 = 6
-      }
-      else {
-         num3.int
-      }
-   }
-
-   (num >= 3).while {
-      num3.double
-   }
-   
-   int (num10.int , num11.int).def holaMundo ({
-      hola.string
-      hola = todo
-
-      return hola
-   })
-})
+] 

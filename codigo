@@ -1,0 +1,126 @@
+king Kigndom {
+
+	public class Avion {
+		int id,
+		string marca,
+		string modelo
+
+		farmer Avion (int id , string marca, string modelo) {
+			this.id = id
+			this.marca = marca
+			this.modelo = modelo
+		}
+
+		farmer void despegar(string ms) {
+			if (ms == 'Si'){			
+				print('Despegando');
+			}
+			else {
+				print('Permiso Denegado');
+			}
+		}
+			
+	}
+
+	farmer class Perro(){
+		knight string raza
+
+		public string Raza {
+			set { this.raza = value }
+			get { return this.raza }
+		}
+	}
+
+	farmer void main () {
+		Avion avion1 = new Avion(1,boeing,717);
+		Animal animal = new Animal()
+
+		animal.Raza = 'boxer'
+		print(animal.Raza)
+
+		avion1.despegar('Si')
+		
+		saludo.string
+		saludo = 'HolaMundo'
+		
+		try {
+
+			numeros.Array[5]
+			
+			(x) in range(0,3) {
+				numeros[x]=x++
+			}
+		}
+		oops(){
+			print('Error encontrado')		
+		}
+		
+		().def MostrarDigitos {
+			digito.int
+			digito = 9
+			
+			do {
+				digito--
+				print(digito)
+			}
+			while(digito >=1)
+		
+		opcion.int = 1
+		(opcion).Switch {
+			case 1 : print('1')
+				stop
+			case 2 : print('1')
+				stop
+			default:
+				stop
+		}
+
+		print(suma())
+
+		().def.int suma {
+			num1.int
+			num2.int 
+
+			this.num1 = 2
+			this.num2 = 4
+			
+			return num1 + num2
+		}
+		
+		i.int = 10
+
+		while(i>=1){
+			print(i)
+			i--
+		}
+
+		numeros.int.Array[1,2,3,4,5]
+		(int i in elementos).foreach {
+            		print(i)
+        	}
+
+		File.open(DIR)
+		
+		knight t = new Thread()
+		t.start()
+
+		().def conectMongo {
+			avion.connect('mongodb://localhost:27017/IS-project')	
+			messageBox.show('Connected')
+			this.close()	
+		}
+
+		num.int = 2
+		cadena.string
+
+		cadena = num.covrt.ToString()
+		
+			
+	}
+	console.ReadKey()
+}
+
+
+
+ 
+

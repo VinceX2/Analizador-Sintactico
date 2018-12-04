@@ -1,15 +1,16 @@
 %{
-    #include<stdio.h>
+    #include <stdio.h>
     #include <stdlib.h>
     #include <math.h>
     #include "string.h"
 
-    extern int yylex(void);
-    extern char *yytext;
-    extern int linea;   
+    extern int yylex(void); 
     extern int yyparse();
+    extern char *yytext;
     extern FILE *yyin;
     void yyerror(char *s);
+    void mserror(char* token, char* st);
+    void msstate();
 %}
 
 %union{
@@ -93,88 +94,263 @@
 %token OPREL_GE
 %token OPREL_EQ
 %token OPREL_NE
+%token PRINT
+%token COMILLA
+%token OPEN
+%token BRAKE
+%token SHOW
+%token SET
+%token CONVERT
+%token CLOSE
+%token PI
+%token MATH
+%token SQRT
+%token CONSTRUCT
+%token DOSPUNTOS
+%token GET
+%token THROWS
 %start namespace
 %%
 
-    namespace: ALCANCE KINGDOM AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN;
+//--------------------------------Namespace---------------------------------------------
 
-    program: declarations statements | declarations | statements;
+    namespace: ALCANCE KINGDOM AGRUP_LBRACK program AGRUP_RBRACK ;
+
+//--------------------------------Program---------------------------------------------
+
+        program: declarations statements | declarations | statements | ;
     
-    declarations: declarations declaration_var | declaration_var;
+//--------------------------------Declarations---------------------------------------------
 
-    declaration_var: 
-                    names PUNTO TIPODATO
-                    | names TIPODATO {printf("\nError Sintactico, falta Tipo de dato\n");} 
-                    | names PUNTO {printf("\nError Sintactico, falta Tipo de dato\n");}
-                    | names {printf("\nError Sintactico, falta declaracion\n");}
-                    ;
+            declarations: declarations declaration_var | declaration_var;
 
-    names: variable | names COMA variable;
+//--------------------------------Variable Declaration---------------------------------------------
 
-    variable: NUMERO | ID;
+                declaration_var: 
+                                names PUNTO TIPODATO
+                                | names TIPODATO {printf("\nError Sintactico, falta Tipo de dato\n");} 
+                                | names PUNTO {printf("\nError Sintactico, falta Tipo de dato\n");}
+                                | names {printf("\nError Sintactico, falta declaracion\n");}
+                                ;
+
+                    names: variable | names COMA variable;
+
+                        variable: NUMERO | ID ;
+
+//--------------------------------Statements---------------------------------------------
+
+            statements: statements statement | statement ; 
+
+                statement: assigment | for_statement | while_statement assigment | if_statement 
+                            | function_statement | do_statement | print_statement
+                            | inc_statement | dec_statement | array_statement
+                            | foreach_statement | class | open | this | return 
+                            | brake | object | call_Function | propiedades
+                            | constructor | throw | msgbox | tryCatch | close
+                            | intString | aritmetic | error {msstate();};
 
 
-    statements: statements statement | statement ; 
+//--------------------------------Statement Assigment---------------------------------------------
+                
+                assigment: variable ASIGNACION expression ;
 
-    statement: assigment | if_statement | for_statement | while_statement 
-                | function_statement ;
+                    tail: AGRUP_LBRACE program AGRUP_RBRACE ;
 
-    assigment: variable ASIGNACION expression ;
+//--------------------------------Statement IF---------------------------------------------
 
-    tail: AGRUP_LBRACE program AGRUP_RBRACE ;
+                    if_statement: 
+                                AGRUP_LPAREN expression AGRUP_RPAREN PUNTO IF AGRUP_LBRACK program
+                                    error {mserror("]","IF");} 
 
-    if_statement: 
-                 AGRUP_LPAREN expression AGRUP_RPAREN PUNTO IF tail elif optional_else
-                 | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO IF tail optional_else
-                 ;
+                                | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO IF error program
+                                    AGRUP_RBRACK {mserror("[","IF");}
+                                
+                                | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO IF AGRUP_LBRACK 
+                                    program AGRUP_RBRACK elif optional_else
 
-    elif: 
-                elif AGRUP_LPAREN expression AGRUP_RPAREN PUNTO ELIF tail
-                | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO ELIF tail
-                ;
+                                | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO IF 
+                                    AGRUP_LBRACK program AGRUP_RBRACK optional_else
 
-    optional_else: ELSE tail;
+                                ;
+//--------------------------------Statement ELIF---------------------------------------------
 
-    for_statement: AGRUP_LPAREN variable AGRUP_RPAREN IN RANGE AGRUP_LPAREN expression AGRUP_RPAREN 
-                    PUNTO CICLO_FOR tail;
+                    elif: 
+                        AGRUP_LPAREN expression AGRUP_RPAREN PUNTO ELIF 
+                            AGRUP_LBRACK program error {mserror("]","ELIF");} 
+                        
+                        | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO ELIF 
+                            error program AGRUP_RBRACK {mserror("[","ELIF");} 
+                        
+                        | AGRUP_LPAREN expression AGRUP_RPAREN PUNTO ELIF 
+                            AGRUP_LBRACK program AGRUP_RBRACK
+
+                        ;
+
+//--------------------------------Statement ELSE---------------------------------------------
+
+                    optional_else: 
+                                ELSE AGRUP_LBRACK program error {mserror("]","ELSE");}   
+
+                                | ELSE error program AGRUP_RBRACK {mserror("[","ELSE");}  
+
+                                | ELSE AGRUP_LBRACK program AGRUP_RBRACK
+                                
+                                | 
+                                ;
+
+                
+//--------------------------------Statement FOR---------------------------------------------
+
+                for_statement:
+                            AGRUP_LPAREN variable AGRUP_RPAREN IN RANGE AGRUP_LPAREN variable AGRUP_RPAREN 
+                                PUNTO CICLO_FOR AGRUP_LBRACE program error {mserror("}","FOR");}
+
+                            | AGRUP_LPAREN variable AGRUP_RPAREN IN RANGE AGRUP_LPAREN variable AGRUP_RPAREN 
+                                PUNTO CICLO_FOR error program AGRUP_RBRACE {mserror("{","FOR");}
+                            
+                            | AGRUP_LPAREN variable AGRUP_RPAREN IN RANGE AGRUP_LPAREN variable AGRUP_RPAREN 
+                                PUNTO CICLO_FOR AGRUP_LBRACE program AGRUP_RBRACE
+                            ;
+
+//--------------------------------Statement ARRAY---------------------------------------------
+
+                array_statement: ID AGRUP_LBRACK parameter_array AGRUP_RBRACK PUNTO TIPODATO;
+
+                parameter_array: variable | parameter_array COMA variable;
+
+
+//--------------------------------Statement WHILE---------------------------------------------
+
+                while_statement: AGRUP_LPAREN expression AGRUP_RPAREN PUNTO CICLO_WHILE tail ;
+
+//--------------------------------Statement DO---------------------------------------------
+
+                do_statement: CICLO_DO AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN 
+                                AGRUP_LPAREN expression AGRUP_RPAREN PUNTO CICLO_WHILE
+                            ;
+
+//--------------------------------Statement Function---------------------------------------------
+
+                function_statement: return_type AGRUP_LPAREN functions_params AGRUP_RPAREN PUNTO FUNCION ID function_tail;
     
-    while_statement: AGRUP_LPAREN expression AGRUP_RPAREN PUNTO CICLO_WHILE tail ;
+                    return_type: TIPODATO;
 
-    function_statement: return_type AGRUP_LPAREN functions_params AGRUP_RPAREN PUNTO FUNCION ID function_tail;
+                    functions_params: parameters | ;
+
+                    parameters: parameters COMA parameter | parameter;
+
+                    parameter: declaration_var;
+
+                    function_tail: AGRUP_LPAREN AGRUP_LBRACE program return_optional AGRUP_RBRACE AGRUP_RPAREN ;
+
+                    return_optional: RETURN expression | ;
+
+//--------------------------------Expressions---------------------------------------------
+                expression: 
+                            variable relat_operator variable 
+                            | variable arit_operator variable
+                            | variable logic_operator variable
+                            | variable
+                            | variable COMA variable
+                            | COMILLA variable COMILLA
+                            ;
     
-    return_type: TIPODATO;
+                    logic_operator: OPLOG_AND | OPLOG_NOT | OPLOG_OR ;
 
-    functions_params: parameters | ;
 
-    parameters: parameters COMA parameter | parameter;
+                    arit_operator: OPARIT_ADD | OPARIT_DEC | OPARIT_DIV | OPARIT_EXP 
+                                    | OPARIT_INC | OPARIT_MUL | OPARIT_REM | OPARIT_SUB
+                                ;
 
-    parameter: declaration_var;
+                    relat_operator: OPREL_EQ | OPREL_GE | OPREL_GT | OPREL_LE | OPREL_LT | OPREL_NE ;
+                
+//--------------------------------Statement printf---------------------------------------------
 
-    function_tail: AGRUP_LPAREN AGRUP_LBRACE program return_optional AGRUP_RBRACE AGRUP_RPAREN ;
+                print_statement: AGRUP_LPAREN expression AGRUP_RPAREN PUNTO PRINT;
 
-    return_optional: RETURN expression | ;
+   
+//--------------------------------Statement INC---------------------------------------------
 
-    expression: 
-                variable relat_operator variable 
-                | variable arit_operator variable
-                | variable logic_operator variable
-                | variable
-                | variable COMA variable
-                ;
+                inc_statement: variable OPARIT_INC ;
+
+//--------------------------------Statement DEC---------------------------------------------
+
+                dec_statement: variable OPARIT_DEC;
+
+//--------------------------------Statement FOREACH---------------------------------------------
+
+                foreach_statement: AGRUP_LPAREN declarations IN variable AGRUP_RPAREN PUNTO CICLO_FOREACH tail;
+
+//--------------------------------Statement CLASS---------------------------------------------
+                class: AGRUP_LBRACK ID AGRUP_RBRACK PUNTO CLASS AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN ;
+
+ //--------------------------------Statement CONSTRUCTOR--------------------------------------------- 
+
+                constructor: CONSTRUCT AGRUP_LBRACK props AGRUP_RBRACK;
+                props: ALCANCE ID | props COMA ALCANCE ID;
+
+ //--------------------------------Statement OPEN---------------------------------------------           
+                open:  OPEN PUNTO AGRUP_LPAREN AGRUP_RPAREN PUNTO variable ; 
+
+ //--------------------------------Statement THIS---------------------------------------------      
+
+                this: REFERENCIA PUNTO variable ; 
+
+ //--------------------------------Statement RETURN---------------------------------------------  
+                return: RETURN expression ;
+
+ //--------------------------------Statement BRAKE---------------------------------------------  
+                brake: BRAKE ;
     
-    logic_operator: OPLOG_AND | OPLOG_NOT | OPLOG_OR ;
+ //--------------------------------Statement OBJECT---------------------------------------------  
+                object: variable DECLARACION AGRUP_LPAREN variable AGRUP_RPAREN ;
+
+ //--------------------------------Statement CALL FUNCTION---------------------------------------------  
+                call_Function: FUNCION AGRUP_LPAREN variable AGRUP_RPAREN ;
+
+ //--------------------------------Statement PROPIEDADES---------------------------------------------  
+                propiedades: GET DOSPUNTOS RETURN ID COMA SET DOSPUNTOS ID ASIGNACION ID;
+
+ //--------------------------------Statement Throws---------------------------------------------              
+                throw: THROWS AGRUP_LBRACK variable AGRUP_RBRACK;
+
+ //--------------------------------Statement MSGBBOX---------------------------------------------  
+                msgbox: AGRUP_LBRACK expression AGRUP_RBRACK PUNTO SHOW;
+
+ //--------------------------------Statement TRY CATCH---------------------------------------------  
+                tryCatch: TRY AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN OOPS 
+                           AGRUP_LPAREN expression AGRUP_RPAREN 
+                           AGRUP_LPAREN AGRUP_LBRACE program AGRUP_RBRACE AGRUP_RPAREN;
+
+ //--------------------------------Statement Cerrar---------------------------------------------                            
+                close: CLOSE AGRUP_LPAREN AGRUP_RPAREN ;
+
+ //--------------------------------Statement COnvert INT String---------------------------------------------             
+            
+                intString: CONVERT AGRUP_LBRACK expression AGRUP_RBRACK PUNTO TIPODATO ;
+
+//--------------------------------Statement Aritmetic---------------------------------------------    
+                aritmetic: MATH AGRUP_LBRACK expression AGRUP_RBRACK PUNTO SQRT;
+
+//--------------------------------Statement ---------------------------------------------   
+
+                aritmetic: MATH AGRUP_LBRACK expression AGRUP_RBRACK PUNTO PI;               
 
 
-    arit_operator: OPARIT_ADD | OPARIT_DEC | OPARIT_DIV | OPARIT_EXP 
-                    | OPARIT_INC | OPARIT_MUL | OPARIT_REM | OPARIT_SUB
-                ;
 
-    relat_operator: OPREL_EQ | OPREL_GE | OPREL_GT | OPREL_LE | OPREL_LT | OPREL_NE ;
 
-    
 %%
-void yyerror(char *s){
-    printf("\n%s \n",s);
+void yyerror(char* s){
+    printf("\n%s",s);
+    
+}
+
+void mserror(char* token,char* st) {
+    printf(" %s se espera token %s\n",st,token);
+}
+
+void msstate() {
+    printf(" Instruccion no valida \n");
 }
 
 int main(int argc, char **argv){
@@ -186,10 +362,8 @@ int main(int argc, char **argv){
         yyin=fopen("text2.txt","rt");
         
     }
-
-    if(yyparse()==0){
-        printf("\nSintaxis Correcta\n");
-    }
+    
+    yyparse();
     
     return 0;
 	
@@ -197,6 +371,6 @@ int main(int argc, char **argv){
 
 
 
-
+/* error {msstate();} */
 
 

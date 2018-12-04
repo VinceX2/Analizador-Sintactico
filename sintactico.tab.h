@@ -121,7 +121,22 @@ extern int yydebug;
     OPREL_LE = 331,
     OPREL_GE = 332,
     OPREL_EQ = 333,
-    OPREL_NE = 334
+    OPREL_NE = 334,
+    PRINT = 335,
+    COMILLA = 336,
+    OPEN = 337,
+    BRAKE = 338,
+    SHOW = 339,
+    SET = 340,
+    CONVERT = 341,
+    CLOSE = 342,
+    PI = 343,
+    MATH = 344,
+    SQRT = 345,
+    CONSTRUCT = 346,
+    DOSPUNTOS = 347,
+    GET = 348,
+    THROWS = 349
   };
 #endif
 
@@ -130,11 +145,11 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 15 "sintactico.y" /* yacc.c:1909  */
+#line 16 "sintactico.y" /* yacc.c:1909  */
 
     
 
-#line 138 "sintactico.tab.h" /* yacc.c:1909  */
+#line 153 "sintactico.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
